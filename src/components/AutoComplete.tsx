@@ -36,13 +36,29 @@ const AutoComplete: React.FC = () => {
     }
   };
 
+  const handleOptionClick = (option: Option): void => {
+    setInputValue(option.name);
+    setFilteredOptions([]);
+  };
+
   return (
     <div>
       <input
         type="text"
+        value={inputValue}
         placeholder="Type here..."
         onChange={handleInputChange}
       />
+      {filteredOptions.length > 0 && (
+        <ul>
+          {filteredOptions.map((option) => (
+            <li key={option.code} onClick={() => handleOptionClick(option)}>
+              <span>{inputValue}</span>
+              {option.name.slice(inputValue.length)}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
