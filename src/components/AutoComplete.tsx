@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { Option } from "../data/countries";
 
 const AutoComplete: React.FC = () => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value, "clicked");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [options, setOptions] = useState<Option[]>([]);
+  const [filteredOptions, setFilteredOptions] = useState<Option[]>([]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
   };
+
   return (
     <div>
       <input
