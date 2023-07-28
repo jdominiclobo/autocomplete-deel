@@ -14,8 +14,26 @@ const AutoComplete: React.FC = () => {
   const [options, setOptions] = useState<Option[]>([]);
   const [filteredOptions, setFilteredOptions] = useState<Option[]>([]);
 
+  useEffect(() => {
+    const loadOptions = async () => {
+      const fetchedOptions = await fetchOptions();
+      setOptions(fetchedOptions);
+    };
+    loadOptions();
+  }, []);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
+    setInputValue(value);
+
+    if (value) {
+      const filtered = options.filter(
+        (option) => option.name.toLowerCase().indexOf(value.toLowerCase()) === 0
+      );
+      setFilteredOptions(filtered);
+    } else {
+      setFilteredOptions([]);
+    }
   };
 
   return (
