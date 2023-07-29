@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { countries as mockOptions, Option } from "../data/countries";
+import "./AutoComplete.css";
 
 const fetchOptions = (): Promise<Option[]> => {
   return new Promise((resolve) => {
@@ -42,7 +43,7 @@ const AutoComplete: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="autocomplete">
       <input
         type="text"
         value={inputValue}
@@ -50,10 +51,14 @@ const AutoComplete: React.FC = () => {
         onChange={handleInputChange}
       />
       {filteredOptions.length > 0 && (
-        <ul>
+        <ul className="autocompletList">
           {filteredOptions.map((option) => (
-            <li key={option.code} onClick={() => handleOptionClick(option)}>
-              <span>{inputValue}</span>
+            <li
+              className="optionStyle"
+              key={option.code}
+              onClick={() => handleOptionClick(option)}
+            >
+              <span className="optionHighlight">{inputValue}</span>
               {option.name.slice(inputValue.length)}
             </li>
           ))}
