@@ -1,7 +1,7 @@
-export interface Option {
+export type Option = {
   name: string;
   code: string;
-}
+};
 
 export const countries: Option[] = [
   { name: "Afghanistan", code: "AF" },
